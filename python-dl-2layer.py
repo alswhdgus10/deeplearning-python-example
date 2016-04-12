@@ -14,11 +14,11 @@ X = np.array([  [0,0,1],
 #output
 y = np.array([[0,0,1,1]]).T
 
-#choose weight randomly
+#choose weight randomly 랜덤으로 생성
 np.random.seed(1)
 syn0 = 2*np.random.random((3,1)) - 1
 
-for iter in xrange(300000):
+for iter in xrange(800000):
 
     l0 = X #first layer
     l1 = nonlin(np.dot(l0,syn0)) #second layer
@@ -26,9 +26,11 @@ for iter in xrange(300000):
     l1_error = y - l1 #calculate error
     if (iter% 50000) == 0:
         print "Error:" + str(np.mean(np.abs(l1_error))) +"\n"
-    l1_delta = l1_error * nonlin(l1,True) #sigmoid function
+    l1_delta = l1_error * nonlin(l1,True) #sigmoid function의 미분값 * 에러 = 델타 값 에러 수정 반영률
 
     syn0 += np.dot(l0.T,l1_delta) #update weight
 
 print "After Training:"
 print l1
+
+#activation function, backpropagation #activation function, backpropagation

@@ -6,6 +6,7 @@ def nonlin(x,deriv=False):
 
 	return 1/(1+np.exp(-x)) # sigmoid function
 
+# 4*3  3*4
 #input
 X = np.array([[0,0,1],
             [0,1,1],
@@ -23,7 +24,7 @@ np.random.seed(1)
 syn0 = 2*np.random.random((3,4)) - 1 #first layer weight value
 syn1 = 2*np.random.random((4,1)) - 1 #second layer weight value
 
-for j in xrange(30000):
+for j in xrange(300000):
 
     l0 = X #first layer
     l1 = nonlin(np.dot(l0,syn0)) #second layer
@@ -33,10 +34,11 @@ for j in xrange(30000):
 
     if (j% 50000) == 0:
         print "Error:" + str(np.mean(np.abs(l2_error))) +"\n"
-        #print "syn0:" + str(syn0)+"\n"
-        #print "syn1:" + str(syn1)+"\n"
-        #print "l1:" + str(l1)+"\n"
-        #print "l2:" + str(l2)+"\n"
+        print "syn0:" + str(syn0)+"\n"
+        print "syn1:" + str(syn1)+"\n"
+        print "l1:" + str(l1)+"\n"
+        print "l2:" + str(l2)+"\n"
+
 
     ##calculate error
     l2_delta = l2_error*nonlin(l2,deriv=True)
